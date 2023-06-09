@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = require('../models/user');
 
-const db = "mongodb+srv://admin:admin@cluster0.d5omcyp.mongodb.net/?readWriteAnyDatabase=true&w=majority";
+const db = "mongodb+srv://admin:admin@cluster0.d5omcyp.mongodb.net/mydatabase?readWriteAnyDatabase=true&w=majority";
 
 
 mongoose.connect(db, { useNewUrlParser: true , useUnifiedTopology: true}, function(err){
@@ -104,9 +104,7 @@ router.post('/register', async (req, res) => {
     try {
       let userData = req.body;
       let user = new User(userData);
-      
       await user.save();
-      console.log(user.save())
       res.status(200).send(user);
     } catch (error) {
       console.log(error);
